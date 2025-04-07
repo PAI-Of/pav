@@ -3,136 +3,233 @@
 <head>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>PAV</title>
-	<link rel="stylesheet" href="css/style.css" />
-	<style>
-		body {
-			font-family: 'Consolas', monospace;
-		}
-	</style>
+	<title>PAV - Powered Intelligence Brand</title>
+	<meta name="description" content="PAV - An independent brand focused on robotics and electrical innovations by Pawan, Alwaz and Vedant">
+	<link rel="icon" type="image/svg+xml" href="img/fav.svg" />
+	<link rel="alternate icon" href="img/fav.png" />
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-	<header>
-		<h1 style="font-weight: lighter;">Welcome to <b>PAV</b></h1>
-		<p>
-			The PAV by<br />
-			1. <b>Pawan Yadav</b> (aka PY) – CEO of <b><a href="https://pavbot.github.io" target="_blank">Powered Intelligence</a></b><br />
-			2. <b>Vedant Meena</b><br />
-			3. <b>M. Alwaz Ahmed</b><br />
-		</p>
-	</header>
-	<!-- <button id="themeToggle" style="position: fixed; top: 10px; right: 10px; z-index: 999;">
-		Toggle Theme
-	</button>	 -->
-	<h2>Our Projects</h2>
-	<main>
-		<!-- Hyper 155C Project -->
-		<section>
-			<h2>Hyper 155C</h2>
+	<button id="themeToggle" aria-label="Toggle theme">🌓</button>
+	
+	<div class="container">
+		<header>
+			<h1>Welcome to <b>PAV</b></h1>
+			
+			<nav>
+				<ul>
+					<li><a href="#about">About</a></li>
+					<li><a href="#projects">Projects</a></li>
+					<li><a href="#contact">Contact</a></li>
+				</ul>
+			</nav>
+			
+			<div id="team">
+				<p>
+					The PAV by<br />
+					1. <b>Pawan Yadav</b> (aka PY) – CEO of <b><a href="https://pavbot.github.io" target="_blank">Powered Intelligence</a></b><br />
+					2. <b>Vedant Meena</b><br />
+					3. <b>M. Alwaz Ahmed</b><br />
+				</p>
+			</div>
+		</header>
+		
+		<section id="about">
+			<h2>About P.A.V</h2>
+			<div class="about-container">
+				<img src="img/logo.svg" id="logo" alt="PAV Logo"/>
+				<div class="text">
+					<p>
+						P.A.V stands for its creators: <b>Pawan</b>, <b>Alwaz</b> and <b>Vedant</b>.<br>
+						This is a brand focusing on providing robotics and electrical items at low cost and high quality.<br>
+						PAV is an Independent Brand — no one controls the brand and it is an <b>Umbrella entity</b>.
+					</p>
+					<p>
+						Our official email ID is: <b>pavgamestudios@gmail.com</b><br>
+						You can share project ideas, and if we have time, we will respond or include them in <b>The Great Projects of PAV</b>.
+					</p>
+				</div>
+			</div>
+			
+			<h3>Our Vision</h3>
 			<p>
-				The <b>Hyper 155C</b> is a high-end, bass-filled Bluetooth speaker
-				featuring two Hyper Boxes. It supports USB charging and is fully wireless.
-				Created by <b>Pawan Yadav</b> and <b>Alwaz Ahmed</b>.
+				The Great Projects of PAV includes things that we need in our 
+				day-to-day life and cannot remove from using. PAV 
+				focuses on that genre - like speakers, torches, fans, heaters 
+				and others with extra features.
 			</p>
-			<div class="project-html">
-				<img src="img/155c.png" alt="Hyper 155C Speaker Image" />
-			</div>
-		</section>
-
-		<!-- Solaris 125k Project -->
-		<section>
-			<h2>Solaris 125k</h2>
-			<em>Glow like a star</em>
 			<p>
-				The <b>Solaris 125k</b> is a solar-powered torch
-				that works up to 4 hours without a single recharge,
-				powered by lithium-ion cells. It also includes a <b>Type-C</b>
-				port for fast charging. Made by <b>Pawan Yadav</b>, <b>Alwaz Ahmed</b>,
-				and <b>Vedant Meena</b>.
+				For example, a speaker's basic function is playing sound, but we don't just add Bluetooth and 
+				a wire connection port. We actually build much more than that, enhancing everyday technology with innovative features.
 			</p>
-			<div class="project-html">
-				<img src="img/124k.png" alt="Solaris 125k Torch Image" />
-			</div>
 		</section>
+		
+		<h2 id="projects">Our Projects</h2>
+		<main>
+			<!-- Hyper 155C Project -->
+			<section>
+				<h2>Hyper 155C</h2>
+				<div class="project-tags">
+					<span class="project-tag">Audio</span>
+					<span class="project-tag">Bluetooth</span>
+					<span class="project-tag">Wireless</span>
+				</div>
+				<p>
+					The <b>Hyper 155C</b> is a high-end, bass-filled Bluetooth speaker
+					featuring two Hyper Boxes. It supports USB charging and is fully wireless.
+					Created by <b>Pawan Yadav</b> and <b>Alwaz Ahmed</b>.
+				</p>
+				<div class="project-html">
+					<img src="img/155c.png" alt="Hyper 155C Speaker Image" />
+				</div>
+			</section>
 
-		<!-- Hydrogen O2 Project -->
-		<section>
-			<h2>The Hydrogen O<sub>2</sub></h2>
-			<h4 style="font-weight: lighter;"><i>With Hydrogen HX10...</i></h4>
-			<p>
-				The Hydrogen O2 is an EV concept car by Powered Intelligence's CEO Pawan Yadav.
-				Powered by the <b>HX10 engine</b>, it's currently in prototype stage.
-				A mini version (RC car) is under development.
-				Here's a conceptual design without wheels:
-			</p>
-			<div class="project-html">
-				<img src="img/ho2.png" alt="Hydrogen O2 Front View" title="Hydrogen O2">
-				<img src="img/ho2-s.png" alt="Hydrogen O2 Side View" title="Hydrogen O2 - Side">
-			</div>
-		</section>
+			<!-- Solaris 125k Project -->
+			<section>
+				<h2>Solaris 125k</h2>
+				<em>Glow like a star</em>
+				<div class="project-tags">
+					<span class="project-tag">Solar</span>
+					<span class="project-tag">USB-C</span>
+					<span class="project-tag">Lighting</span>
+				</div>
+				<p>
+					The <b>Solaris 125k</b> is a solar-powered torch
+					that works up to 4 hours without a single recharge,
+					powered by lithium-ion cells. It also includes a <b>Type-C</b>
+					port for fast charging. Made by <b>Pawan Yadav</b>, <b>Alwaz Ahmed</b>,
+					and <b>Vedant Meena</b>.
+				</p>
+				<div class="project-html">
+					<img src="img/124k.png" alt="Solaris 125k Torch Image" />
+				</div>
+			</section>
 
-		<!-- ZX2 Project -->
-		<section>
-			<h2>The <b>Z<sup>x</sup>²</b></h2>
-			<div class="project-html">
-				<img src="img/zx2.png" alt="ZX2 Project Image" draggable="false" />
-			</div>
-		</section>
+			<!-- Hydrogen O2 Project -->
+			<section>
+				<h2>The Hydrogen O<sub>2</sub></h2>
+				<h4><i>With Hydrogen HX10...</i></h4>
+				<div class="project-tags">
+					<span class="project-tag">Electric Vehicle</span>
+					<span class="project-tag">Prototype</span>
+					<span class="project-tag">HX10 Engine</span>
+				</div>
+				<p>
+					The Hydrogen O2 is an EV concept car by Powered Intelligence's CEO Pawan Yadav.
+					Powered by the <b>HX10 engine</b>, it's currently in prototype stage.
+					A mini version (RC car) is under development.
+					Here's a conceptual design without wheels:
+				</p>
+				<div class="project-html">
+					<img src="img/ho2.png" alt="Hydrogen O2 Front View" title="Hydrogen O2">
+					<img src="img/ho2-s.png" alt="Hydrogen O2 Side View" title="Hydrogen O2 - Side">
+				</div>
+			</section>
 
-		<!-- HX10 Engine -->
-		<section>
-			<h3>The <b>Hydrogen HX10 EV Engine</b></h3>
-			<p>
-				This blueprint may require basic electrical engineering knowledge.<br />
-				NOTE: Protected by <b>CC BY-ND-NC 4.0 International</b> license.<br />
-				&copy; 2025 Pawan Yadav
-			</p>
+			<!-- ZX2 Project -->
+			<section>
+				<h2>The <b>Z<sup>x</sup>²</b></h2>
+				<div class="project-tags">
+					<span class="project-tag">Concept</span>
+				</div>
+				<p>
+					Our upcoming innovative project with more details coming soon.
+				</p>
+				<div class="project-html">
+					<img src="img/zx2.png" alt="ZX2 Project Image" draggable="false" />
+				</div>
+			</section>
+			
+			<!-- Power B2X Project -->
+			<section>
+				<h2>The <b>Power B<sup>2</sup>X</b></h2>
+				<div class="project-tags">
+					<span class="project-tag">Power Bank</span>
+					<span class="project-tag">USB</span>
+					<span class="project-tag">Portable Charging</span>
+				</div>
+				<div class="project-html">
+					<img src="img/b2x.svg" alt="B2X Project Image" draggable="false" />
+				</div>
+				<p>
+					The Power B2X is an affordable Power Bank with 2 USB ports and 1 
+					USB charging port. It features a <b>special type C port</b> for Type C to 
+					Type C or Type C to any port connections. With 8000mAh capacity, it offers long battery 
+					life and a single charge multiple use framework to make all things 
+					work seamlessly. Just plug it and Charge away! The compact design is also pocket 
+					friendly, fitting in most pocket sizes for true portability.
+				</p>
+			</section>
+			
+			<!-- HX10 Engine -->
+			<section>
+				<h3>The <b>Hydrogen HX10 EV Engine</b></h3>
+				<div class="project-tags">
+					<span class="project-tag">Electric Motor</span>
+					<span class="project-tag">Blueprint</span>
+					<span class="project-tag">EV Technology</span>
+				</div>
+				<p>
+					This blueprint may require basic electrical engineering knowledge.<br />
+					NOTE: Protected by <b>CC BY-ND-NC 4.0 International</b> license.<br />
+					&copy; 2025 Pawan Yadav
+				</p>
 
-			<h4>Legend</h4>
-			<div class="project-html">
-				<img src="img/hx10-a.png" alt="HX10 Packed Blueprint" title="HX10 Packed"><br><br>
-				<img src="img/hx10.png" id="big" alt="HX10 Internal" title="HX10 Internal"><br />
-			</div>
+				<h4>Blueprint</h4>
+				<div class="project-html">
+					<img src="img/hx10-a.png" alt="HX10 Packed Blueprint" title="HX10 Packed"><br>
+					<img src="img/hx10.png" id="big" alt="HX10 Internal" title="HX10 Internal">
+				</div>
 
-			<h4>Explanation</h4>
-			<p>
-				<span style="color: black;">Black = Power Positive</span><br />
-				<span style="color: green;">Green = Power Negative</span><br />
-				<span style="color: blue;">Blue = Control Back</span><br />
-				<span style="color: red;">Red = Control Front</span><br />
-				<span style="color: magenta;">Magenta = Motor Negative</span><br />
-				<span style="color: orange;">Orange = Motor Positive</span><br><br>
+				<h4>Explanation</h4>
+				<div class="color-legend">
+					<p>
+						<span style="background-color: black; color: white;">Black = Power Positive</span>
+						<span style="background-color: green; color: white;">Green = Power Negative</span>
+						<span style="background-color: blue; color: white;">Blue = Control Back</span>
+						<span style="background-color: red; color: white;">Red = Control Front</span>
+						<span style="background-color: magenta; color: white;">Magenta = Motor Negative</span>
+						<span style="background-color: orange; color: black;">Orange = Motor Positive</span>
+					</p>
+				</div>
 
-				<b>When <span style="color: blue;">Blue</span> is set to 1 (True)</b>, the circuit provides + from the right and – from the left to the motor,
-				making it spin <b>anti-clockwise (BACK)</b>.<br>
-				<b>When <span style="color: red;">Red</span> is 1</b>, – from the right and + from the left are provided,
-				spinning the motor <b>clockwise (FRONT)</b>.<br><br>
+				<p>
+					<b>When <span style="color: blue;">Blue</span> is set to 1 (True)</b>, the circuit provides + from the right and – from the left to the motor,
+					making it spin <b>anti-clockwise (BACK)</b>.<br>
+					<b>When <span style="color: red;">Red</span> is 1</b>, – from the right and + from the left are provided,
+					spinning the motor <b>clockwise (FRONT)</b>.
+				</p>
 
-				To connect:
+				<h4>Connection Instructions:</h4>
 				<ul>
 					<li>Connect <span style="color: orange;">Orange</span> to motor's +</li>
 					<li>Connect <span style="color: magenta;">Magenta</span> to motor's –</li>
 					<li>Connect <span style="color: green;">Green</span> to battery –</li>
 					<li>Connect <span style="color: black;">Black</span> to battery +</li>
 				</ul>
+			</section>
+		</main>
+
+		<section id="contact">
+			<h2>Contact Us</h2>
+			<p>
+				Have questions or project ideas? Reach out to us through our official email:
+				<b>pavgamestudios@gmail.com</b>
+			</p>
+			<p>
+				We're always looking for innovative ideas to add to The Great Projects of PAV.
 			</p>
 		</section>
-	</main>
 
-	<footer>
-		<p>
-			&copy; <b>Webpage | Created by Pawan Yadav.</b><br />
-			&copy; <b>PAV Project | Created by P.A.V</b><br />
-			&reg; 2025 - 2030 P.A.V. All rights reserved.
-		</p>
-	</footer>
+		<footer>
+			<p>
+				&copy; <b>Webpage | Created by Pawan Yadav.</b><br />
+				&copy; <b>PAV Project | Created by P.A.V</b><br />
+				&reg; 2025 - 2030 P.A.V. All rights reserved.
+			</p>
+		</footer>
+	</div>
+
+	<script src="./js/index.js"></script>
 </body>
-
-<script>
-  const toggleBtn = document.getElementById('themeToggle');
-  toggleBtn.addEventListener('click', () => {
-    document.body.classList.toggle('light-theme');
-  });
-</script>
-
 </html>

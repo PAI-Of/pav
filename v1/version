@@ -1,0 +1,6 @@
+version 1.0.0-release-candidate
+from (6.4.25) to (7.4.25)
+© Pawan Yadav 2025 |< PAV ® >
+reason: The PAV's official webpage, removed in one day because next day (7.4.25) we had to add new idea and some features.
+commit-msg: The PAV v1
+to-usr: Welcome to PAV 1.0.0rc
