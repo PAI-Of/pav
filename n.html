@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>PAV</title>
+	<meta name="description" content="PAV - An independent brand focused on robotics and electrical innovations by Pawan, Alwaz and Vedant">
+	<link rel="icon" type="image/svg+xml" href="img/fav.svg" />
+	<link rel="alternate icon" href="img/fav.png" />
+	<style>
+    @font-face {
+      font-family: 'JetBrainsMono';
+      src: url('font/JBMR.woff2') format('woff2');
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    :root {
+      --primary-gradient: linear-gradient(135deg, #2196f3, #9c27b0);
+      --light-gradient: linear-gradient(135deg, #f0f0f0, #d3e3ff);
+      --dark-bg: rgba(0, 0, 0, 0.3);
+      --light-bg: rgba(255, 255, 255, 0.6);
+      --dark-text: #111;
+      --light-text: #f3f3f3;
+      --accent: #0077ff;
+      --shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+      --border-radius: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'JetBrainsMono', 'Consolas', monospace;
+      background: var(--primary-gradient);
+      color: var(--light-text);
+      padding: 20px;
+      line-height: 1.6;
+      transition: background 0.3s ease;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    header {
+      padding: 20px 0;
+    }
+
+    h1, h2, h3, h4 {
+      font-weight: lighter;
+      margin-bottom: 0.5em;
+      margin-top: 1em;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+    }
+
+    h2 {
+      font-size: 2rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      padding-bottom: 10px;
+    }
+
+    h3 {
+      font-size: 1.5rem;
+    }
+
+    p {
+      margin-bottom: 1em;
+    }
+
+    a {
+      color: #fff;
+      text-decoration: underline;
+      transition: opacity 0.2s;
+    }
+
+    a:hover {
+      opacity: 0.8;
+    }
+
+    main {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      padding: 20px 0;
+    }
+
+    section {
+      background-color: var(--dark-bg);
+      border-radius: var(--border-radius);
+      padding: 30px;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    section:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
+    }
+
+    .about-container {
+      display: flex;
+      align-items: flex-start;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    #logo {
+      width: 250px;
+      height: auto;
+      filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.2));
+    }
+
+    .text {
+      max-width: 700px;
+      font-size: 1.1em;
+    }
+
+    .project-html {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-top: 20px;
+      justify-content: center;
+    }
+
+    .project-html img {
+      width: 25vw;
+      max-width: 100%;
+      border-radius: 12px;
+      user-select: none;
+      pointer-events: none;
+      object-fit: contain;
+      background-color: transparent;
+      filter: brightness(0.98) contrast(1.2);
+      max-height: 300px;
+      transition: transform 0.3s ease;
+    }
+
+    .project-html img:hover {
+      transform: scale(1.05);
+    }
+
+    #big {
+      width: 50%;
+    }
+
+    .project-tag {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.8em;
+      margin-right: 8px;
+      margin-bottom: 8px;
+    }
+
+    .color-legend span {
+      display: inline-block;
+      padding: 2px 8px;
+      margin: 5px;
+      border-radius: 4px;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      padding: 20px 0;
+      font-size: 14px;
+      color: #e0e0e0;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* Theme toggle button */
+    #themeToggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 999;
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      transition: background 0.3s ease;
+      box-shadow: var(--shadow);
+    }
+
+    #themeToggle:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    /* Light theme */
+    .light-theme {
+      background: var(--light-gradient);
+      color: var(--dark-text);
+    }
+
+    .light-theme section {
+      background-color: var(--light-bg);
+    }
+
+    .light-theme a {
+      color: var(--accent);
+    }
+
+    .light-theme footer {
+      color: #444;
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .light-theme .project-tag {
+      background: rgba(0, 0, 0, 0.1);
+    }
+
+    /* Responsive design */
+    @media screen and (max-width: 768px) {
+      h1 {
+        font-size: 2rem;
+      }
+      
+      h2 {
+        font-size: 1.5rem;
+      }
+      
+      section {
+        padding: 20px;
+      }
+      
+      .project-html img {
+        width: 90%;
+      }
+
+      #big {
+        width: 100%;
+      }
+      
+      .about-container {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      #logo {
+        width: 180px;
+      }
+    }
+
+    /* Navigation */
+    nav {
+      margin: 20px 0;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      text-decoration: none;
+      padding: 8px 15px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      transition: background 0.3s ease;
+    }
+
+    nav a:hover {
+      background: rgba(255, 255, 255, 0.2);
+      opacity: 1;
+    }
+
+    .light-theme nav a {
+      background: rgba(0, 0, 0, 0.1);
+    }
+
+    .light-theme nav a:hover {
+      background: rgba(0, 0, 0, 0.2);
+    }
+	</style>
+</head>
+<body>
+	<button id="themeToggle" aria-label="Toggle theme">🌓</button>
+	
+	<div class="container">
+		<header>
+			<h1>Welcome to <b>PAV</b></h1>
+			
+			<nav>
+				<ul>
+					<li><a href="#about">About</a></li>
+					<li><a href="#projects">Projects</a></li>
+					<li><a href="#contact">Contact</a></li>
+				</ul>
+			</nav>
+			
+			<div id="team">
+				<p>
+					The PAV by<br />
+					1. <b>Pawan Yadav</b> (aka PY) – CEO of <b><a href="https://pavbot.github.io" target="_blank">Powered Intelligence</a></b><br />
+					2. <b>Vedant Meena</b><br />
+					3. <b>M. Alwaz Ahmed</b><br />
+				</p>
+			</div>
+		</header>
+		
+		<section id="about">
+			<h2>About P.A.V</h2>
+			<div class="about-container">
+				<img src="img/logo.svg" id="logo" alt="PAV Logo"/>
+				<div class="text">
+					<p>
+						P.A.V stands for its creators: <b>Pawan</b>, <b>Alwaz</b> and <b>Vedant</b>.<br>
+						This is a brand focusing on providing robotics and electrical items at low cost and high quality.<br>
+						PAV is an Independent Brand — no one controls the brand and it is an <b>Umbrella entity</b>.
+					</p>
+					<p>
+						Our official email ID is: <b>pavgamestudios@gmail.com</b><br>
+						You can share project ideas, and if we have time, we will respond or include them in <b>The Great Projects of PAV</b>.
+					</p>
+				</div>
+			</div>
+			
+			<h3>Our Vision</h3>
+			<p>
+				The Great Projects of PAV includes things that we need in our 
+				day-to-day life and cannot remove from using. PAV 
+				focuses on that genre - like speakers, torches, fans, heaters 
+				and others with extra features.
+			</p>
+			<p>
+				For example, a speaker's basic function is playing sound, but we don't just add Bluetooth and 
+				a wire connection port. We actually build much more than that, enhancing everyday technology with innovative features.
+			</p>
+		</section>
+		
+		<h2 id="projects">Our Projects</h2>
+		<main>
+			<!-- Hyper 155C Project -->
+			<section>
+				<h2>Hyper 155C</h2>
+				<div class="project-tags">
+					<span class="project-tag">Audio</span>
+					<span class="project-tag">Bluetooth</span>
+					<span class="project-tag">Wireless</span>
+				</div>
+				<p>
+					The <b>Hyper 155C</b> is a high-end, bass-filled Bluetooth speaker
+					featuring two Hyper Boxes. It supports USB charging and is fully wireless.
+					Created by <b>Pawan Yadav</b> and <b>Alwaz Ahmed</b>.
+				</p>
+				<div class="project-html">
+					<img src="img/155c.png" alt="Hyper 155C Speaker Image" />
+				</div>
+			</section>
+
+			<!-- Solaris 125k Project -->
+			<section>
+				<h2>Solaris 125k</h2>
+				<em>Glow like a star</em>
+				<div class="project-tags">
+					<span class="project-tag">Solar</span>
+					<span class="project-tag">USB-C</span>
+					<span class="project-tag">Lighting</span>
+				</div>
+				<p>
+					The <b>Solaris 125k</b> is a solar-powered torch
+					that works up to 4 hours without a single recharge,
+					powered by lithium-ion cells. It also includes a <b>Type-C</b>
+					port for fast charging. Made by <b>Pawan Yadav</b>, <b>Alwaz Ahmed</b>,
+					and <b>Vedant Meena</b>.
+				</p>
+				<div class="project-html">
+					<img src="img/124k.png" alt="Solaris 125k Torch Image" />
+				</div>
+			</section>
+
+			<!-- Hydrogen O2 Project -->
+			<section>
+				<h2>The Hydrogen O<sub>2</sub></h2>
+				<h4><i>With Hydrogen HX10...</i></h4>
+				<div class="project-tags">
+					<span class="project-tag">Electric Vehicle</span>
+					<span class="project-tag">Prototype</span>
+					<span class="project-tag">HX10 Engine</span>
+				</div>
+				<p>
+					The Hydrogen O2 is an EV concept car by Powered Intelligence's CEO Pawan Yadav.
+					Powered by the <b>HX10 engine</b>, it's currently in prototype stage.
+					A mini version (RC car) is under development.
+					Here's a conceptual design without wheels:
+				</p>
+				<div class="project-html">
+					<img src="img/ho2.png" alt="Hydrogen O2 Front View" title="Hydrogen O2">
+					<img src="img/ho2-s.png" alt="Hydrogen O2 Side View" title="Hydrogen O2 - Side">
+				</div>
+			</section>
+
+			<!-- ZX2 Project -->
+			<section>
+				<h2>The <b>Z<sup>x</sup>²</b></h2>
+				<div class="project-tags">
+					<span class="project-tag">Concept</span>
+				</div>
+				<p>
+					Our upcoming innovative project with more details coming soon.
+				</p>
+				<div class="project-html">
+					<img src="img/zx2.png" alt="ZX2 Project Image" draggable="false" />
+				</div>
+			</section>
+			
+			<!-- Power B2X Project -->
+			<section>
+				<h2>The <b>Power B<sup>2</sup>X</b></h2>
+				<div class="project-tags">
+					<span class="project-tag">Power Bank</span>
+					<span class="project-tag">USB</span>
+					<span class="project-tag">Portable Charging</span>
+				</div>
+				<div class="project-html">
+					<img src="img/b2x.svg" alt="B2X Project Image" draggable="false" />
+				</div>
+				<p>
+					The Power B2X is an affordable Power Bank with 2 USB ports and 1 
+					USB charging port. It features a <b>special type C port</b> for Type C to 
+					Type C or Type C to any port connections. With 8000mAh capacity, it offers long battery 
+					life and a single charge multiple use framework to make all things 
+					work seamlessly. Just plug it and Charge away! The compact design is also pocket 
+					friendly, fitting in most pocket sizes for true portability.
+				</p>
+			</section>
+			
+			<!-- HX10 Engine -->
+			<section>
+				<h3>The <b>Hydrogen HX10 EV Engine</b></h3>
+				<div class="project-tags">
+					<span class="project-tag">Electric Motor</span>
+					<span class="project-tag">Blueprint</span>
+					<span class="project-tag">EV Technology</span>
+				</div>
+				<p>
+					This blueprint may require basic electrical engineering knowledge.<br />
+					NOTE: Protected by <b>CC BY-ND-NC 4.0 International</b> license.<br />
+					&copy; 2025 Pawan Yadav
+				</p>
+
+				<h4>Blueprint</h4>
+				<div class="project-html">
+					<img src="img/hx10-a.png" alt="HX10 Packed Blueprint" title="HX10 Packed"><br>
+					<img src="img/hx10.png" id="big" alt="HX10 Internal" title="HX10 Internal">
+				</div>
+
+				<h4>Explanation</h4>
+				<div class="color-legend">
+					<p>
+						<span style="background-color: black; color: white;">Black = Power Positive</span>
+						<span style="background-color: green; color: white;">Green = Power Negative</span>
+						<span style="background-color: blue; color: white;">Blue = Control Back</span>
+						<span style="background-color: red; color: white;">Red = Control Front</span>
+						<span style="background-color: magenta; color: white;">Magenta = Motor Negative</span>
+						<span style="background-color: orange; color: black;">Orange = Motor Positive</span>
+					</p>
+				</div>
+
+				<p>
+					<b>When <span style="color: blue;">Blue</span> is set to 1 (True)</b>, the circuit provides + from the right and – from the left to the motor,
+					making it spin <b>anti-clockwise (BACK)</b>.<br>
+					<b>When <span style="color: red;">Red</span> is 1</b>, – from the right and + from the left are provided,
+					spinning the motor <b>clockwise (FRONT)</b>.
+				</p>
+
+				<h4>Connection Instructions:</h4>
+				<ul>
+					<li>Connect <span style="color: orange;">Orange</span> to motor's +</li>
+					<li>Connect <span style="color: magenta;">Magenta</span> to motor's –</li>
+					<li>Connect <span style="color: green;">Green</span> to battery –</li>
+					<li>Connect <span style="color: black;">Black</span> to battery +</li>
+				</ul>
+			</section>
+		</main>
+
+		<section id="contact">
+			<h2>Contact Us</h2>
+			<p>
+				Have questions or project ideas? Reach out to us through our official email:
+				<b>pavgamestudios@gmail.com</b>
+			</p>
+			<p>
+				We're always looking for innovative ideas to add to The Great Projects of PAV.
+			</p>
+		</section>
+
+		<footer>
+			<p>
+				&copy; <b>Webpage | Created by Pawan Yadav.</b><br />
+				&copy; <b>PAV Project | Created by P.A.V</b><br />
+				&reg; 2025 - 2030 P.A.V. All rights reserved.
+			</p>
+		</footer>
+	</div>
+
+	<script>
+		// Theme toggle functionality
+		const toggleBtn = document.getElementById('themeToggle');
+		const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+		
+		// Check for saved theme preference or use the OS preference
+		if (localStorage.getItem('theme') === 'light' || 
+			(!localStorage.getItem('theme') && !prefersDarkScheme.matches)) {
+			document.body.classList.add('light-theme');
+			toggleBtn.textContent = '🌙';
+		} else {
+			toggleBtn.textContent = '☀️';
+		}
+		
+		// Toggle theme when button is clicked
+		toggleBtn.addEventListener('click', () => {
+			document.body.classList.toggle('light-theme');
+			
+			// Update button icon and save preference
+			if (document.body.classList.contains('light-theme')) {
+				toggleBtn.textContent = '🌙';
+				localStorage.setItem('theme', 'light');
+			} else {
+				toggleBtn.textContent = '☀️';
+				localStorage.setItem('theme', 'dark');
+			}
+		});
+		
+		// Smooth scroll for navigation links
+		document.querySelectorAll('nav a').forEach(anchor => {
+			anchor.addEventListener('click', function(e) {
+				e.preventDefault();
+				const targetId = this.getAttribute('href');
+				const targetElement = document.querySelector(targetId);
+				
+				if (targetElement) {
+					window.scrollTo({
+						top: targetElement.offsetTop - 20,
+						behavior: 'smooth'
+					});
+				}
+			});
+		});
+	</script>
+</body>
+</html>
