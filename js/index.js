@@ -40,3 +40,7 @@ document.querySelectorAll('nav a').forEach(anchor => {
         }
     });
 });
+// © The PAV Group
+// &
+// Pawan Yadav @ github.com/PAI-Of
+// PAI-Of means Powered Intelligence Official
