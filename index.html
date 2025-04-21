@@ -1,1121 +1,234 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PAV</title>
-    <style>
-        :root {
-            --primary-bg: #0a0a14;
-            --secondary-bg: #12121f;
-            --accent-1: #3a86ff;
-            --accent-2: #8338ec;
-            --text-primary: #f0f0f0;
-            --text-secondary: #a0a0a0;
-            --gradient-1: linear-gradient(135deg, #3a86ff, #8338ec);
-            --gradient-2: linear-gradient(135deg, #8338ec, #ff006e);
-            --gradient-3: linear-gradient(135deg, #ff006e, #fb5607);
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            scroll-behavior: smooth;
-        }
-        
-        body {
-            background-color: var(--primary-bg);
-            color: var(--text-primary);
-            overflow-x: hidden;
-        }
-        
-        .container {
-            width: 100%;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            background: rgba(10, 10, 20, 0.8);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-        }
-        
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.5rem 0;
-        }
-        
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            background: var(--gradient-1);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-        
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-        }
-        
-        .nav-links a {
-            color: var(--text-primary);
-            text-decoration: none;
-            font-weight: 500;
-            position: relative;
-            padding: 0.5rem 0;
-            transition: color 0.3s ease;
-        }
-        
-        .nav-links a:hover {
-            color: var(--accent-1);
-        }
-        
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--gradient-1);
-            transition: width 0.3s ease;
-        }
-        
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-        
-        #hero {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .hero-content {
-            position: relative;
-            z-index: 2;
-        }
-        
-        .hero-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at center, rgba(58, 134, 255, 0.2), rgba(10, 10, 20, 0.8));
-            z-index: 1;
-        }
-        
-        .hero-grid {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-            background-size: 30px 30px;
-            z-index: 1;
-        }
-        
-        h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
-            line-height: 1.2;
-        }
-        
-        h1 span {
-            background: var(--gradient-1);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-        
-        .hero-text {
-            font-size: 1.2rem;
-            color: var(--text-secondary);
-            max-width: 600px;
-            margin-bottom: 2rem;
-            line-height: 1.6;
-        }
-        
-        .cta-btn {
-            display: inline-block;
-            padding: 1rem 2rem;
-            background: var(--gradient-1);
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(58, 134, 255, 0.3);
-        }
-        
-        .cta-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(58, 134, 255, 0.5);
-        }
-        
-        .section-title {
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-            text-align: center;
-            position: relative;
-            padding-bottom: 1rem;
-        }
-        
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 3px;
-            background: var(--gradient-1);
-        }
-        
-        section {
-            padding: 6rem 0;
-        }
-        
-        .projects {
-            padding: 6rem 0;
-            background-color: var(--secondary-bg);
-        }
-        
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-        
-        .project-card {
-            background: rgba(18, 18, 31, 0.8);
-            border-radius: 15px;
-            overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 30px rgba(58, 134, 255, 0.2);
-        }
-        
-        .project-card:nth-child(1) {
-            background: linear-gradient(to bottom right, rgba(18, 18, 31, 0.9), rgba(58, 134, 255, 0.1));
-        }
-        
-        .project-card:nth-child(2) {
-            background: linear-gradient(to bottom right, rgba(18, 18, 31, 0.9), rgba(131, 56, 236, 0.1));
-        }
-        
-        .project-card:nth-child(3) {
-            background: linear-gradient(to bottom right, rgba(18, 18, 31, 0.9), rgba(255, 0, 110, 0.1));
-        }
-        
-        .project-card:nth-child(4) {
-            background: linear-gradient(to bottom right, rgba(18, 18, 31, 0.9), rgba(251, 86, 7, 0.1));
-        }
-        
-        .project-card:nth-child(5) {
-            background: linear-gradient(to bottom right, rgba(18, 18, 31, 0.9), rgba(58, 134, 255, 0.1));
-        }
-        
-        .project-card:nth-child(6) {
-            background: linear-gradient(to bottom right, rgba(18, 18, 31, 0.9), rgba(131, 56, 236, 0.1));
-        }
-        
-        .project-img {
-            width: 100%;
-            height: 200px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: rgba(10, 10, 20, 0.5);
-            overflow: hidden;
-        }
-        
-        .project-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .project-icon {
-            font-size: 3rem;
-            color: var(--accent-1);
-        }
-        
-        .project-content {
-            padding: 1.5rem;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .project-title {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 1rem;
-        }
-        
-        .project-title h3 {
-            font-size: 1.5rem;
-            margin-right: 0.5rem;
-        }
-        
-        .project-version {
-            font-size: 0.85rem;
-            color: var(--accent-1);
-            background: rgba(58, 134, 255, 0.1);
-            padding: 0.25rem 0.5rem;
-            border-radius: 50px;
-        }
-        
-        .project-tagline {
-            font-size: 1.1rem;
-            font-weight: 500;
-            color: var(--text-secondary);
-            margin-bottom: 1rem;
-        }
-        
-        .project-features {
-            margin-top: 1rem;
-            flex-grow: 1;
-        }
-        
-        .feature {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 0.5rem;
-        }
-        
-        .feature-icon {
-            margin-right: 0.5rem;
-            color: var(--accent-1);
-            font-size: 1.2rem;
-        }
-        
-        .project-footer {
-            margin-top: 1.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .learn-more {
-            color: var(--accent-1);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-        
-        .learn-more:hover {
-            color: var(--accent-2);
-        }
-        
-        .learn-more span {
-            margin-left: 0.5rem;
-            transition: transform 0.3s ease;
-        }
-        
-        .learn-more:hover span {
-            transform: translateX(5px);
-        }
-
-        #fusion-section {
-            padding: 6rem 0;
-            background-color: var(--primary-bg);
-        }
-
-        .fusion-types {
-            margin-top: 3rem;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .fusion-card {
-            background: rgba(18, 18, 31, 0.8);
-            border-radius: 15px;
-            padding: 1.5rem;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .fusion-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(58, 134, 255, 0.2);
-        }
-
-        .fusion-type {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-            color: var(--accent-1);
-        }
-
-        .fusion-name {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-
-        .fusion-efficiency {
-            display: inline-block;
-            padding: 0.25rem 0.5rem;
-            background: rgba(58, 134, 255, 0.1);
-            border-radius: 50px;
-            font-size: 0.85rem;
-            margin-bottom: 1rem;
-        }
-
-        .fusion-notes {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            line-height: 1.5;
-        }
-
-        footer {
-            background-color: var(--secondary-bg);
-            padding: 3rem 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            flex-wrap: wrap;
-            gap: 2rem;
-        }
-
-        .footer-info {
-            flex: 1;
-            min-width: 250px;
-        }
-
-        .footer-logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            background: var(--gradient-1);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            margin-bottom: 1rem;
-        }
-
-        .footer-text {
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
-        }
-
-        .footer-links {
-            flex: 1;
-            min-width: 150px;
-        }
-
-        .footer-links h4 {
-            margin-bottom: 1.5rem;
-            font-size: 1.2rem;
-        }
-
-        .footer-links ul {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .footer-links a:hover {
-            color: var(--accent-1);
-        }
-
-        .footer-bottom {
-            margin-top: 3rem;
-            text-align: center;
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .animate {
-            animation: fadeInUp 0.6s ease forwards;
-        }
-
-        /* Floating particles */
-        .particles {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: 1;
-        }
-
-        .particle {
-            position: absolute;
-            border-radius: 50%;
-            opacity: 0.3;
-            pointer-events: none;
-        }
-
-        @media screen and (max-width: 768px) {
-            h1 {
-                font-size: 2.5rem;
-            }
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-            .fusion-types {
-                grid-template-columns: 1fr;
-            }
-            .navbar {
-                padding: 1rem 0;
-            }
-            .nav-links {
-                gap: 1rem;
-            }
-        }
-    </style>
-    
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>PAV - Powered Intelligence Brand</title>
+	<meta name="description" content="PAV - An independent brand focused on robotics and electrical innovations by Pawan and Vedant">
+	<link rel="icon" type="image/svg+xml" href="img/fav.svg" />
+	<link rel="alternate icon" href="img/fav.png" />
+	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <header>
-        <div class="container">
-            <nav class="navbar">
-                <div class="logo">PAV technologies</div>
-                <div class="nav-links">
-                    <a href="#hero">Home</a>
-                    <a href="#projects">Projects</a>
-                    <a href="#fusion-section">Zero Fusion</a>
-                    <a href="#contact">Contact</a>
-                </div>
-            </nav>
-        </div>
-    </header>
+	<button id="themeToggle" aria-label="Toggle theme">🌓</button>
+	
+	<div class="container">
+		<header>
+			<h1>Welcome to <b>PAV</b></h1>
+			
+			<nav>
+				<ul>
+					<li><a href="#about">About</a></li>
+					<li><a href="#projects">Projects</a></li>
+					<li><a href="#contact">Contact</a></li>
+				</ul>
+			</nav>
+			
+			<div id="team">
+				<p>
+					The PAV by<br />
+					1. <b>Pawan Yadav</b> (aka PY) – CEO of <b><a href="https://pavbot.github.io" target="_blank">Powered Intelligence</a></b><br />
+					2. <b>Vedant Meena</b><br />
+				</p>
+			</div>
+		</header>
+		
+		<section id="about">
+			<h2>About P.A.V</h2>
+			<div class="about-container">
+				<img src="img/logo.svg" id="logo" alt="PAV Logo"/>
+				<div class="text">
+					<p>
+						P.A.V stands for its creators: <b>Pawan</b> and <b>Vedant</b>.<br>
+						This is a brand focusing on providing robotics and electrical items at low cost and high quality.<br>
+						PAV is an Independent Brand — no one controls the brand and it is an <b>Umbrella entity</b>.
+					</p>
+					<p>
+						Our official email ID is: <b>pavgamestudios@gmail.com</b><br>
+						You can share project ideas, and if we have time, we will respond or include them in <b>The Great Projects of PAV</b>.
+					</p>
+				</div>
+			</div>
+			
+			<h3>Our Vision</h3>
+			<p>
+				The Great Projects of PAV includes things that we need in our 
+				day-to-day life and cannot remove from using. PAV 
+				focuses on that genre - like speakers, torches, fans, heaters 
+				and others with extra features.
+			</p>
+			<p>
+				For example, a speaker's basic function is playing sound, but we don't just add Bluetooth and 
+				a wire connection port. We actually build much more than that, enhancing everyday technology with innovative features.
+			</p>
+		</section>
+		
+		<h2 id="projects">Our Projects</h2>
+		<main>
+			<!-- Hyper 155C Project -->
+			<section>
+				<h2>Hyper 155C</h2>
+				<div class="project-tags">
+					<span class="project-tag">Audio</span>
+					<span class="project-tag">Bluetooth</span>
+					<span class="project-tag">Wireless</span>
+				</div>
+				<p>
+					The <b>Hyper 155C</b> is a high-end, bass-filled Bluetooth speaker
+					featuring two Hyper Boxes. It supports USB charging and is fully wireless.
+					Created by <b>Pawan Yadav</b>.
+				</p>
+				<div class="project-html">
+					<img src="img/155c.png" alt="Hyper 155C Speaker Image" />
+				</div>
+			</section>
 
-    <section id="hero">
-        <div class="hero-bg"></div>
-        <div class="hero-grid"></div>
-        <div class="particles" id="particles"></div>
-        <div class="container">
-            <div class="hero-content">
-                <h1>Pioneering the Future with <span>technologies</span> that no one dreamed of.</h1>
-                <p class="hero-text">Discover our cutting-edge innovations designed to transform how we interact with energy, sound, and power. Our futuristic solutions push boundaries and redefine what's possible.</p>
-                <a href="#projects" class="cta-btn">Explore Projects</a>
-            </div>
-        </div>
-    </section>
+			<!-- Solaris 125k Project -->
+			<section>
+				<h2>Solaris 125k</h2>
+				<em>Glow like a star</em>
+				<div class="project-tags">
+					<span class="project-tag">Solar</span>
+					<span class="project-tag">USB-C</span>
+					<span class="project-tag">Lighting</span>
+				</div>
+				<p>
+					The <b>Solaris 125k</b> is a solar-powered torch
+					that works up to 4 hours without a single recharge,
+					powered by lithium-ion cells. It also includes a <b>Type-C</b>
+					port for fast charging. Made by <b>Pawan Yadav</b>
+					and <b>Vedant Meena</b>.
+				</p>
+				<div class="project-html">
+					<img src="img/124k.png" alt="Solaris 125k Torch Image" />
+				</div>
+			</section>
 
-    <section id="projects" class="projects">
-        <div class="container">
-            <h2 class="section-title">Innovative Projects</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-img">
-                        <img src="/api/placeholder/400/320" alt="HYPER 155CX">
-                    </div>
-                    <div class="project-content">
-                        <div class="project-title">
-                            <h3>HYPER 155CX</h3>
-                            <span class="project-version">NEW</span>
-                        </div>
-                        <p class="project-tagline">🔊 Bass Beyond Boundaries</p>
-                        <div class="project-features">
-                            <div class="feature">
-                                <span class="feature-icon">✓</span>
-                                <span>Bluetooth 5.3 (Low Latency, Long Range)</span>
-                            </div>
-                            <div class="feature">
-                                <span class="feature-icon">✓</span>
-                                <span>Dynamic Dual Driver Bass Boost</span>
-                            </div>
-                            <div class="feature">
-                                <span class="feature-icon">✓</span>
-                                <span>Solar Charging Panel</span>
-                            </div>
-                            <div class="feature">
-                                <span class="feature-icon">✓</span>
-                                <span>Smart Battery Optimization</span>
-                            </div>
-                        </div>
-                        <div class="project-footer">
-                            <a href="#" class="learn-more">Learn more <span>→</span></a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="project-card">
-                    <div class="project-img">
-                        <img src="./img/126p.svg" alt="SOLARIS 126 PRO" width="100%">
-                    </div>
-                    <div class="project-content">
-                        <div class="project-title">
-                            <h3>SOLARIS 126 PRO</h3>
-                            <span class="project-version">NEW</span>
-                        </div>
-                        <p class="project-tagline">🌟 UltraLight Power Anywhere</p>
-                        <div class="project-features">
-                            <div class="feature">
-                                <span class="feature-icon">✓</span>
-                                <span>USB-C + Wireless Charging Torch</span>
-                            </div>
-                            <div class="feature">
-                                <span class="feature-icon">✓</span>
-                                <span>6 Hour Solar Backup</span>
-                            </div>
-                            <div class="feature">
-                                <span class="feature-icon">✓</span>
-                                <span>Smart Adaptive Brightness</span>
-                            </div>
-                            <div class="feature">
-                                <span class="feature-icon">✓</span>
-                                <span>LED Battery Indicator Strip</span>
-                            </div>
-                        </div>
-                        <div class="project-footer">
-                            <a href="#" class="learn-more">Learn more <span>→</span></a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="project-card">
-                    <div class="project-img">
-                        <img src="/api/placeholder/400/320" alt="Zx³ CONCEPT">
-                    </div>
-                    <div class="project-content">
-                        <div class="project-title">
-                            <h3>Zx³ CONCEPT</h3>
-                            <span class="project-version">R&D</span>
-                        </div>
-                        <p class="project-tagline">🛠️ Infinite Innovation</p>
-                        <div class="project-features">
-                            <div class="feature">
-                                <span class="feature-icon">✓</span>
-                                <span>Wireless Energy Transfer Research</span>
-                            </div>
-                            <div class="feature">
-                                <span class="feature-icon">✓</span>
-                                <span>Smart Materials Concept (Self-Healing)</span>
-                            </div>
-                            <div class="feature">
-                                <span class="feature-icon">✓</span>
-                                <span>Modular Portable Power Pack Idea</span>
-                            </div>
-                        </div>
-                        <div class="project-footer">
-                            <a href="#" class="learn-more">Learn more <span>→</span></a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="project-card">
-                    <div class="project-img">
-                        <img src="/api/placeholder/400/320" alt="POWER B2X-PLUS">
-                    </div>
-                    <div class="project-content">
-                        <div class="project-title">
-                            <h3>POWER B2X-PLUS</h3>
-                            <span class="project-version">NEW</span>
-                        </div>
-                        <p class="project-tagline">🔋 Charge Unleashed</p>
-                        <div class="project-features">
-                            <div class="feature">
-                                <span class="feature-icon">✓</span>
-                                <span>Triple USB Ports (2 USB-A, 1 USB-C PD)</span>
-                            </div>
-                            <div class="feature">
-                                <span class="feature-icon">✓</span>
-                                <span>Fast Charge 3.0 Support</span>
-                            </div>
-                            <div class="feature">
-                                <span class="feature-icon">✓</span>
-                                <span>Solar Panel Integration Option</span>
-                            </div>
-                            <div class="feature">
-                                <span class="feature-icon">✓</span>
-                                <span>Battery Health Management System</span>
-                            </div>
-                        </div>
-                        <div class="project-footer">
-                            <a href="#" class="learn-more">Learn more <span>→</span></a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="project-card">
-                    <div class="project-img">
-                        <img src="/api/placeholder/400/320" alt="HX12 CORE">
-                    </div>
-                    <div class="project-content">
-                        <div class="project-title">
-                            <h3>HX12 CORE</h3>
-                            <span class="project-version">NEW</span>
-                        </div>
-                        <p class="project-tagline">⚙️ Future of EV Drive Systems</p>
-                        <div class="project-features">
-                            <div class="feature">
-                                <span class="feature-icon">✓</span>
-                                <span>More torque + Better Cooling Efficiency</span>
-                            </div>
-                            <div class="feature">
-                                <span class="feature-icon">✓</span>
-                                <span>Modular Motor Architecture</span>
-                            </div>
-                            <div class="feature">
-                                <span class="feature-icon">✓</span>
-                                <span>Designed for Mini and Full-Scale EVs</span>
-                            </div>
-                        </div>
-                        <div class="project-footer">
-                            <a href="#" class="learn-more">Learn more <span>→</span></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+			<!-- Hydrogen O2 Project -->
+			<section>
+				<h2>The Hydrogen O<sub>2</sub></h2>
+				<h4><i>With Hydrogen HX10...</i></h4>
+				<div class="project-tags">
+					<span class="project-tag">Electric Vehicle</span>
+					<span class="project-tag">Prototype</span>
+					<span class="project-tag">HX10 Engine</span>
+				</div>
+				<p>
+					The Hydrogen O2 is an EV concept car by Powered Intelligence's CEO Pawan Yadav.
+					Powered by the <b>HX10 engine</b>, it's currently in prototype stage.
+					A mini version (RC car) is under development.
+					Here's a conceptual design without wheels:
+				</p>
+				<div class="project-html">
+					<img src="img/ho2.png" alt="Hydrogen O2 Front View" title="Hydrogen O2">
+					<img src="img/ho2-s.png" alt="Hydrogen O2 Side View" title="Hydrogen O2 - Side">
+				</div>
+			</section>
 
-    <section id="fusion-section">
-        <div class="container">
-            <h2 class="section-title">Zero Fusion Technology</h2>
-            <p style="text-align: center; max-width: 700px; margin: 0 auto; color: var(--text-secondary);">
-                Our revolutionary energy transfer methods redefine what's possible in power delivery systems.
-            </p>
-            
-            <div class="fusion-types">
-                <div class="fusion-card">
-                    <div class="fusion-type">Type 1</div>
-                    <h3 class="fusion-name">Thermal Point Transfer (TPT)</h3>
-                    <div class="fusion-efficiency">Efficiency: ~80%</div>
-                    <p class="fusion-notes">Send heat → captured by thermoelectric/thermal-PV modules</p>
-                </div>
-                
-                <div class="fusion-card">
-                    <div class="fusion-type">Type 2</div>
-                    <h3 class="fusion-name">Hydro Spin Launch (HSL)</h3>
-                    <div class="fusion-efficiency">Efficiency: ~40%</div>
-                    <p class="fusion-notes">Spin water → transfer kinetic energy → captured by turbines/EMF</p>
-                </div>
-                
-                <div class="fusion-card">
-                    <div class="fusion-type">Type 3</div>
-                    <h3 class="fusion-name">Magnetic Displacement Transfer (MDT)</h3>
-                    <div class="fusion-efficiency">Efficiency: ~55%</div>
-                    <p class="fusion-notes">Spinning/oscillating magnets induce current in receiver coil</p>
-                </div>
-                
-                <div class="fusion-card">
-                    <div class="fusion-type">Type 4</div>
-                    <h3 class="fusion-name">Particle Beam Charge (PBC)</h3>
-                    <div class="fusion-efficiency">Efficiency: ~30%</div>
-                    <p class="fusion-notes">Fire plasma/ions → receiver captures electric flow</p>
-                </div>
-            </div>
-        </div>
-    </section>
+			<!-- ZX2 Project -->
+			<section>
+				<h2>The <b>Z<sup>x</sup>²</b></h2>
+				<div class="project-tags">
+					<span class="project-tag">Concept</span>
+				</div>
+				<p>
+					Our upcoming innovative project with more details coming soon.
+				</p>
+				<div class="project-html">
+					<img src="img/zx2.png" alt="ZX2 Project Image" draggable="false" />
+				</div>
+			</section>
+			
+			<!-- Power B2X Project -->
+			<section>
+				<h2>The <b>Power B<sup>2</sup>X</b></h2>
+				<div class="project-tags">
+					<span class="project-tag">Power Bank</span>
+					<span class="project-tag">USB</span>
+					<span class="project-tag">Portable Charging</span>
+				</div>
+				<div class="project-html">
+					<img src="img/b2x.svg" alt="B2X Project Image" draggable="false" />
+				</div>
+				<p>
+					The Power B2X is an affordable Power Bank with 2 USB ports and 1 
+					USB charging port. It features a <b>special type C port</b> for Type C to 
+					Type C or Type C to any port connections. With 8000mAh capacity, it offers long battery 
+					life and a single charge multiple use framework to make all things 
+					work seamlessly. Just plug it and Charge away! The compact design is also pocket 
+					friendly, fitting in most pocket sizes for true portability.
+				</p>
+			</section>
+			
+			<!-- HX10 Engine -->
+			<section>
+				<h3>The <b>Hydrogen HX10 EV Engine</b></h3>
+				<div class="project-tags">
+					<span class="project-tag">Electric Motor</span>
+					<span class="project-tag">Blueprint</span>
+					<span class="project-tag">EV Technology</span>
+				</div>
+				<p>
+					This blueprint may require basic electrical engineering knowledge.<br />
+					NOTE: Protected by <b>CC BY-ND-NC 4.0 International</b> license.<br />
+					&copy; 2025 Pawan Yadav
+				</p>
 
-    <footer id="contact">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-info">
-                    <div class="footer-logo">PAV technologies</div>
-                    <p class="footer-text">
-                        Pushing the boundaries of innovation with next-generation technology solutions and sustainable energy systems.
-                    </p>
-                </div>
-                
-                <div class="footer-links">
-                    <h4>Navigation</h4>
-                    <ul>
-                        <li><a href="#hero">Home</a></li>
-                        <li><a href="#projects">Projects</a></li>
-                        <li><a href="#fusion-section">Zero Fusion</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-links">
-                    <h4>Products</h4>
-                    <ul>
-                        <li><a href="#">HYPER 155CX</a></li>
-                        <li><a href="#">SOLARIS 126 PRO</a></li>
-                        <li><a href="#">Zx³ CONCEPT</a></li>
-                        <li><a href="#">POWER B2X-PLUS</a></li>
-                        <li><a href="#">HX12 CORE</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-links">
-                    <h4>Contact</h4>
-                    <ul>
-                        <li><a href="mailto:info@nextgen-innovations.com">Email Us</a></li>
-                        <li><a href="#">Support</a></li>
-                        <li><a href="#">Press</a></li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2025 PAV technologies. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+				<h4>Blueprint</h4>
+				<div class="project-html">
+					<img src="img/hx10-a.png" alt="HX10 Packed Blueprint" title="HX10 Packed"><br>
+					<img src="img/hx10.png" id="big" alt="HX10 Internal" title="HX10 Internal">
+				</div>
 
-    <script>
-// Smooth scrolling for navigation links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
-        });
-    });
-});
+				<h4>Explanation</h4>
+				<div class="color-legend">
+					<p>
+						<span style="background-color: black; color: white;">Black = Power Positive</span>
+						<span style="background-color: green; color: white;">Green = Power Negative</span>
+						<span style="background-color: blue; color: white;">Blue = Control Back</span>
+						<span style="background-color: red; color: white;">Red = Control Front</span>
+						<span style="background-color: magenta; color: white;">Magenta = Motor Negative</span>
+						<span style="background-color: orange; color: black;">Orange = Motor Positive</span>
+					</p>
+				</div>
 
-// Navbar scroll effect
-window.addEventListener('scroll', function() {
-    const header = document.querySelector('header');
-    if (window.scrollY > 100) {
-        header.style.padding = '0.5rem 0';
-        header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
-    } else {
-        header.style.padding = '1rem 0';
-        header.style.boxShadow = 'none';
-    }
-});
+				<p>
+					<b>When <span style="color: blue;">Blue</span> is set to 1 (True)</b>, the circuit provides + from the right and – from the left to the motor,
+					making it spin <b>anti-clockwise (BACK)</b>.<br>
+					<b>When <span style="color: red;">Red</span> is 1</b>, – from the right and + from the left are provided,
+					spinning the motor <b>clockwise (FRONT)</b>.
+				</p>
 
-// Animate elements on scroll
-const observerOptions = {
-    root: null,
-    rootMargin: '0px',
-    threshold: 0.1
-};
+				<h4>Connection Instructions:</h4>
+				<ul>
+					<li>Connect <span style="color: orange;">Orange</span> to motor's +</li>
+					<li>Connect <span style="color: magenta;">Magenta</span> to motor's –</li>
+					<li>Connect <span style="color: green;">Green</span> to battery –</li>
+					<li>Connect <span style="color: black;">Black</span> to battery +</li>
+				</ul>
+			</section>
+		</main>
 
-const observer = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('animate');
-            observer.unobserve(entry.target);
-        }
-    });
-}, observerOptions);
+		<section id="contact">
+			<h2>Contact Us</h2>
+			<p>
+				Have questions or project ideas? Reach out to us through our official email:
+				<b>pavgamestudios@gmail.com</b>
+			</p>
+			<p>
+				We're always looking for innovative ideas to add to The Great Projects of PAV.
+			</p>
+		</section>
 
-document.querySelectorAll('.project-card, .fusion-card, .section-title').forEach(el => {
-    observer.observe(el);
-});
+		<footer>
+			<p>
+				&copy; <b>Webpage | Created by Pawan Yadav.</b><br />
+				&copy; <b>PAV Project | Created by P.A.V</b><br />
+				&reg; 2025 - 2030 P.A.V. All rights reserved.
+			</p>
+		</footer>
+	</div>
 
-// Create floating particles
-function createParticles() {
-    const particlesContainer = document.getElementById('particles');
-    const colors = ['#3a86ff', '#8338ec', '#ff006e', '#fb5607'];
-    
-    for (let i = 0; i < 30; i++) {
-        const particle = document.createElement('div');
-        particle.classList.add('particle');
-        
-        const size = Math.random() * 10 + 5;
-        const color = colors[Math.floor(Math.random() * colors.length)];
-        
-        particle.style.width = `${size}px`;
-        particle.style.height = `${size}px`;
-        particle.style.background = color;
-        particle.style.left = `${Math.random() * 100}%`;
-        particle.style.top = `${Math.random() * 100}%`;
-        
-        // Animation
-        const duration = Math.random() * 15 + 15;
-        const delay = Math.random() * 5;
-        
-        particle.style.animation = `float ${duration}s ${delay}s infinite ease-in-out`;
-        particle.style.opacity = Math.random() * 0.5 + 0.1;
-        
-        particlesContainer.appendChild(particle);
-    }
-}
-
-// Add floating animation
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes float {
-        0%, 100% {
-            transform: translateY(0) translateX(0);
-        }
-        25% {
-            transform: translateY(-30px) translateX(15px);
-        }
-        50% {
-            transform: translateY(-15px) translateX(-15px);
-        }
-        75% {
-            transform: translateY(-25px) translateX(5px);
-        }
-    }
-`;
-document.head.appendChild(style);
-
-// Initialize particles on load
-window.addEventListener('load', function() {
-    createParticles();
-    
-    // Add animation delay to stagger element reveals
-    document.querySelectorAll('.project-card').forEach((card, index) => {
-        card.style.animationDelay = `${0.1 * index}s`;
-    });
-    
-    document.querySelectorAll('.fusion-card').forEach((card, index) => {
-        card.style.animationDelay = `${0.1 * index}s`;
-    });
-});
-
-// Modal functionality for project details
-const modal = document.createElement('div');
-modal.className = 'modal';
-modal.innerHTML = `
-    <div class="modal-content">
-        <span class="close-modal">&times;</span>
-        <div class="modal-body"></div>
-    </div>
-`;
-document.body.appendChild(modal);
-
-// Add modal styles
-const modalStyle = document.createElement('style');
-modalStyle.textContent = `
-    .modal {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.8);
-        z-index: 2000;
-        align-items: center;
-        justify-content: center;
-    }
-    
-    .modal-content {
-        background: var(--secondary-bg);
-        max-width: 800px;
-        width: 90%;
-        border-radius: 15px;
-        position: relative;
-        overflow: hidden;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        max-height: 90vh;
-        display: flex;
-        flex-direction: column;
-    }
-    
-    .close-modal {
-        position: absolute;
-        top: 20px;
-        right: 20px;
-        font-size: 24px;
-        color: var(--text-primary);
-        cursor: pointer;
-        z-index: 10;
-        width: 30px;
-        height: 30px;
-        background: rgba(0, 0, 0, 0.3);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    
-    .modal-body {
-        padding: 30px;
-        overflow-y: auto;
-    }
-`;
-document.head.appendChild(modalStyle);
-
-// Open modal on "Learn more" clicks
-document.querySelectorAll('.learn-more').forEach((btn, index) => {
-    btn.addEventListener('click', function(e) {
-        e.preventDefault();
-        
-        const projectCards = document.querySelectorAll('.project-card');
-        const project = projectCards[index];
-        const title = project.querySelector('h3').textContent;
-        const tagline = project.querySelector('.project-tagline').textContent;
-        const features = project.querySelector('.project-features').innerHTML;
-        
-        modal.querySelector('.modal-body').innerHTML = `
-            <h2>${title}</h2>
-            <p class="modal-tagline">${tagline}</p>
-            <img src="/api/placeholder/700/350" alt="${title}" style="width: 100%; border-radius: 10px; margin: 20px 0;">
-            <h3>Features</h3>
-            <div class="modal-features">${features}</div>
-            <div class="modal-description">
-                <h3>About ${title}</h3>
-                <p>This cutting-edge product represents the future of innovation in its category. 
-                With advanced technology and sustainable design, it offers unparalleled performance 
-                while maintaining energy efficiency.</p>
-                <p>Our research team has spent countless hours perfecting every aspect of this 
-                product to ensure it meets the high standards our customers expect.</p>
-            </div>
-            <div class="modal-cta" style="margin-top: 30px;">
-                <a href="#" class="cta-btn">Pre-order Now</a>
-            </div>
-        `;
-        
-        modal.style.display = 'flex';
-    });
-});
-
-// Close modal when clicking the close button or outside the modal
-document.querySelector('.close-modal').addEventListener('click', function() {
-    modal.style.display = 'none';
-});
-
-window.addEventListener('click', function(e) {
-    if (e.target === modal) {
-        modal.style.display = 'none';
-    }
-});
-
-// Add a custom cursor effect (futuristic touch)
-const cursor = document.createElement('div');
-cursor.className = 'custom-cursor';
-document.body.appendChild(cursor);
-
-const cursorStyle = document.createElement('style');
-cursorStyle.textContent = `
-    .custom-cursor {
-        width: 30px;
-        height: 30px;
-        border: 2px solid var(--accent-1);
-        border-radius: 50%;
-        position: fixed;
-        pointer-events: none;
-        transform: translate(-50%, -50%);
-        transition: width 0.2s, height 0.2s, border-color 0.2s;
-        z-index: 9999;
-        mix-blend-mode: difference;
-        display: none;
-    }
-    
-    @media (min-width: 768px) {
-        .custom-cursor {
-            display: block;
-        }
-        
-        body {
-            cursor: none;
-        }
-        
-        a, button, .project-card, .fusion-card {
-            cursor: none;
-        }
-    }
-`;
-document.head.appendChild(cursorStyle);
-
-// Update cursor position
-document.addEventListener('mousemove', function(e) {
-    cursor.style.left = e.clientX + 'px';
-    cursor.style.top = e.clientY + 'px';
-});
-
-// Change cursor on hoverable elements
-document.querySelectorAll('a, button, .project-card, .fusion-card').forEach(el => {
-    el.addEventListener('mouseenter', () => {
-        cursor.style.width = '50px';
-        cursor.style.height = '50px';
-        cursor.style.borderColor = 'var(--accent-2)';
-    });
-    
-    el.addEventListener('mouseleave', () => {
-        cursor.style.width = '30px';
-        cursor.style.height = '30px';
-        cursor.style.borderColor = 'var(--accent-1)';
-    });
-});
-
-// Parallax effect on scroll
-window.addEventListener('scroll', function() {
-    const scrollPosition = window.pageYOffset;
-    
-    // Parallax for hero section
-    const heroContent = document.querySelector('.hero-content');
-    heroContent.style.transform = `translateY(${scrollPosition * 0.2}px)`;
-    
-    // Parallax for particles
-    const particles = document.getElementById('particles');
-    particles.style.transform = `translateY(${scrollPosition * 0.1}px)`;
-});
-
-// Project hover effect enhancements
-document.querySelectorAll('.project-card').forEach(card => {
-    card.addEventListener('mouseenter', function() {
-        this.querySelector('.project-img img').style.transform = 'scale(1.05)';
-        this.style.transform = 'translateY(-10px)';
-    });
-    
-    card.addEventListener('mouseleave', function() {
-        this.querySelector('.project-img img').style.transform = 'scale(1)';
-        this.style.transform = 'translateY(0)';
-    });
-});
-
-// Add image transition styles
-const imageTransitionStyle = document.createElement('style');
-imageTransitionStyle.textContent = `
-    .project-img img {
-        transition: transform 0.3s ease;
-    }
-`;
-document.head.appendChild(imageTransitionStyle);
-</script>
+	<script src="js/index.js"></script>
 </body>
 </html>
